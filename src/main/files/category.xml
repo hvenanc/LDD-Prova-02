@@ -1,0 +1,18 @@
+<categories>
+    <category id="1" name="Action" />
+    <category id="2" name="Animation" />
+    <category id="3" name="Children" />
+    <category id="4" name="Classics" />
+    <category id="5" name="Comedy" />
+    <category id="6" name="Documentary" />
+    <category id="7" name="Drama" />
+    <category id="8" name="Family" />
+    <category id="9" name="Foreign" />
+    <category id="10" name="Games" />
+    <category id="11" name="Horror" />
+    <category id="12" name="Music" />
+    <category id="13" name="New" />
+    <category id="14" name="Sci-Fi" />
+    <category id="15" name="Sports" />
+    <category id="16" name="Travel" />
+</categories>
