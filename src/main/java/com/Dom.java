@@ -15,8 +15,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,16 +24,7 @@ import java.util.logging.Logger;
 public class Dom {
 
     private Document doc;
-    private final List<String> categoryId = new ArrayList<>();
-    private final List<String> categoryName = new ArrayList<>();
-
-    public List<String> getCategoryId() {
-        return categoryId;
-    }
-
-    public List<String> getCategoryName() {
-        return categoryName;
-    }
+    private final Map<Integer, String> categoryMap = new HashMap<>();
 
     public Dom(String path) {
 
@@ -51,8 +42,9 @@ public class Dom {
         NodeList category = doc.getElementsByTagName("category");
         for (int i = 0; i < category.getLength(); i++) {
             Element categoryItem = (Element) category.item(i);
-            categoryId.add(categoryItem.getAttribute("id"));
-            categoryName.add(categoryItem.getAttribute("name"));
+             Integer id = Integer.valueOf(categoryItem.getAttribute("id"));
+             String name = categoryItem.getAttribute("name");
+             categoryMap.putIfAbsent(id, name);
         }
     }
 
@@ -63,17 +55,15 @@ public class Dom {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document document = dBuilder.newDocument();
-            var categoryIdList = getCategoryId();
-            var categoryNameList = getCategoryName();
 
             Element olElement = document.createElement("ol");
             document.appendChild(olElement);
 
-            for(int i = 0; i < categoryIdList.size(); i++) {
+            for(Map.Entry<Integer, String> entry : categoryMap.entrySet()) {
 
                 Element liElement = document.createElement("li");
-                liElement.setAttribute("id", categoryIdList.get(i));
-                liElement.setTextContent(String.valueOf(categoryNameList.get(i)));
+                liElement.setAttribute("id", entry.getKey().toString());
+                liElement.setTextContent(entry.getValue());
                 olElement.appendChild(liElement);
 
             }
