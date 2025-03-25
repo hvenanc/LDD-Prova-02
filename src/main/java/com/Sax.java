@@ -88,7 +88,7 @@ public class Sax extends DefaultHandler {
                var categoryName = categoryNameMap.get(film_id);
 
                 writer.writeStartElement("td");
-                writer.writeCharacters(categoryName.toString());
+                writer.writeCharacters(categoryName);
                 writer.writeEndElement();
 
                 writer.writeEndElement();
